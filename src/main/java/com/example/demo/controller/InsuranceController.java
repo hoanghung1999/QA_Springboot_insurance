@@ -22,21 +22,32 @@ public class InsuranceController {
     private InsuranceService insuranceService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<Insurance>> getAllInsurance(){
-        List<Insurance> allInsurance=insuranceService.getAllInsurance();
+    public ResponseEntity<List<Insurance>> getAllInsurance() {
+        List<Insurance> allInsurance = insuranceService.getAllInsurance();
         return new ResponseEntity<>(allInsurance, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<Insurance> CreatNewInsurance(@RequestBody Insurance insurance){
-        System.out.println();
-        insurance=insuranceService.saveInsurance(insurance);
-        return new ResponseEntity<>(insurance,HttpStatus.OK);
-    }
+//    @PostMapping(value = "/add")
+//    public ResponseEntity<Insurance> CreatNewInsurance(@RequestBody Insurance insurance) {
+//        insurance = insuranceService.saveInsurance(insurance);
+//        return new ResponseEntity<>(insurance, HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/get")
-    public ResponseEntity<?> getInsuranceById(@RequestParam("id") long id){
-        Optional<Insurance> insurance=insuranceService.findInsuranceById(id);
+    public ResponseEntity<?> getInsuranceById(@RequestParam("id") long id) {
+        Optional<Insurance> insurance = insuranceService.findInsuranceById(id);
         return new ResponseEntity<>(insurance, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<?> UpdateInsurance(@RequestBody Insurance insurance) {
+
+
+        if (insuranceService.findInsuranceById(insurance.getId()).isPresent()) {
+            insuranceService.UpdateInsurance(insurance);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

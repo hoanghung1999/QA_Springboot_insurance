@@ -19,7 +19,7 @@ import java.util.Date;
 @Data
 public class Deal implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "timeComplete")
     private Date timeComplete;

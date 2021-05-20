@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 public class Insurance implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "nametype")
@@ -34,8 +34,4 @@ public class Insurance implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Collection<Deal> deal;
-
-
-
-
 }

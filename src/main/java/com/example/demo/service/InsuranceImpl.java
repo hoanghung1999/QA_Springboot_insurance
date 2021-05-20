@@ -20,8 +20,12 @@ public class InsuranceImpl implements InsuranceService{
     }
 
     @Override
-    public Insurance saveInsurance(Insurance insurance) {
-    return insuranceRepository.save(insurance);
+    public Insurance UpdateInsurance(Insurance insurance) {
+        Optional<Insurance> insuranceDB=insuranceRepository.findById(insurance.getId());
+        if(insuranceDB.isPresent()) {
+            return insuranceRepository.save(insurance);
+        }
+        return null;
     }
     @Override
     public void deleteInsuranceById(long id) {

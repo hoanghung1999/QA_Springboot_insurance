@@ -10,4 +10,6 @@ public interface DealService {
     public Optional<Deal> getDealById(long id);
     public List<Deal> getDealByNameUser(String name);
     public List<Deal> getDealByNameInsurance(String name);
+    public List<Deal> getDealByDate(String startDate,String endDate);
+
 }

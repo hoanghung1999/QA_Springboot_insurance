@@ -27,4 +27,9 @@ public class DealController {
         return new ResponseEntity<>(dealhasInsur, HttpStatus.OK);
     }
 
+    @GetMapping(value="/get")
+    public ResponseEntity<List<Deal>> getDealByDate(@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate ){
+    List<Deal> dealByDate=dealService.getDealByDate(startDate,endDate);
+    return new ResponseEntity<>(dealByDate,HttpStatus.OK);
+    }
 }

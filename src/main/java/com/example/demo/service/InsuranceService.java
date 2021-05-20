@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface InsuranceService {
     public List<Insurance> getAllInsurance();
-    public Insurance saveInsurance(Insurance insurance);
+    public Insurance UpdateInsurance(Insurance insurance);
     public void deleteInsuranceById(long id);
     public Optional<Insurance> findInsuranceById(long id);
 

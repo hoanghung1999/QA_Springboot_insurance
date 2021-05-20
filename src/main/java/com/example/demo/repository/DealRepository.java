@@ -12,5 +12,6 @@ public interface DealRepository extends JpaRepository<Deal,Long> {
     @Query(value = "select d.*,i.* FROM deal d JOIN insurance i on d.insurance_id=i.id where i.nametype=?1",nativeQuery = true)
     public List<Deal> getAllDealByInSurName(String name);
 
-//    @Query(value = "SELECT * FROM deal d JOIN user u ON d.user_id =u.id where u.fullname like '%a%'")
+    @Query(value = "SELECT * FROM deal d JOIN user u on d.insurance_id=u.id JOIN insurance ins ON d.insurance_id=ins.id where time_complete>=?1 and time_complete<=?2",nativeQuery = true)
+    public List<Deal> getAllDealByDate(String startDate,String endDate);
 }

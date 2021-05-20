@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Insurance;
 import com.example.demo.entity.User;
+import com.example.demo.service.InsuranceService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -10,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins ="*")
@@ -22,6 +21,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private InsuranceService insuranceService;
 
     @RequestMapping("/")
     public ResponseEntity<List<User>> getAllUser(Model model) {
@@ -31,8 +32,9 @@ public class UserController {
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     public ResponseEntity<User> addUser(@RequestBody User user) {
-        userService.saveUser(user);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        User userSave=userService.saveUser(user);
+        System.out.println(userSave.getFullname());
+        return new ResponseEntity<>(userSave,HttpStatus.OK);
     }
 
     @RequestMapping(value = "get",method = RequestMethod.GET)
@@ -69,5 +71,10 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @PostMapping(value = "save")
+    public ResponseEntity<?> test(@RequestBody User user){
+        userService.saveUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.LazyCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import java.util.Collection;
 @Data
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "fullname")
@@ -32,7 +33,8 @@ public class User implements Serializable {
     private String address;
     @Getter(onMethod = @__( @JsonIgnore ))
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "insurance_id") // thông qua khóa ngoại address_id
     private Insurance insurance;
 
@@ -40,7 +42,6 @@ public class User implements Serializable {
     @Getter(onMethod = @__( @JsonIgnore ))
     @Setter
     private Collection<Deal> deals;
-
     public InsuranceDto getInsuranceDto(){
         InsuranceDto insuranceDto= InsuranceMapper.toInsuranceDto(insurance);
         return insuranceDto;

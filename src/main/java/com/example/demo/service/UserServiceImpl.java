@@ -20,9 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
-        System.out.println(user.getId()+user.getFullname());
+    public User saveUser(User user) {
+    return userRepository.save(user);
     }
 
     @Override

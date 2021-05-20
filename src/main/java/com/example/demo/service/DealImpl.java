@@ -29,4 +29,9 @@ public class DealImpl implements DealService{
     public List<Deal> getDealByNameInsurance(String name) {
         return dealRepository.getAllDealByInSurName(name);
     }
+
+    @Override
+    public List<Deal> getDealByDate(String startDate, String endDate) {
+        return dealRepository.getAllDealByDate(startDate,endDate);
+    }
 }
